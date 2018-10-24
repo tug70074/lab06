@@ -4,6 +4,7 @@ package edu.temple.paletteactivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.View;
@@ -20,29 +21,32 @@ public class CustomAdapter extends BaseAdapter {
 
     Context context; // which means the listview, spinner view which we are working and adapting on. so the custom adapter knows what we are working on
     int count;
-    String[] Colorstrings = {"red", "blue", "magenta", "green", "yellow"};
+    String[] colors;
+
+    //Resources res = this.context.getResources();
+    //String[] spinnerlabels = res.getStringArray(R.array.colors);
+
+    //String[] Colorstrings = {"red", "blue", "magenta", "green", "yellow"};
 
     //create constructor;
 
 
-    public CustomAdapter(Context context, int count) {
-        this.context = context;
-        this.count = Colorstrings.length;
-    }
 
-    public CustomAdapter(Context context) {
+
+    public CustomAdapter(Context context, String[] string) {
         this.context = context;
+        this.colors = string;
     }
 
 
     @Override
     public int getCount() {
-        return Colorstrings.length;
+        return colors.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return Colorstrings[i];
+        return colors[i];
     }
 
     @Override
@@ -55,9 +59,9 @@ public class CustomAdapter extends BaseAdapter {
 
         TextView textColor = new TextView(context);
 
-        textColor.setText(Colorstrings[i]);
+        textColor.setText(colors[i]);
 
-        textColor.setBackgroundColor(Color.parseColor(Colorstrings[i]));
+        textColor.setBackgroundColor(Color.parseColor(colors[i]));
 
 
 
