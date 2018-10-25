@@ -28,7 +28,7 @@ public class PaletteActivity extends AppCompatActivity implements SpinnerFragmen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palette);
+        setContentView(R.layout.activity_palette); //asdf
 
         singlePane = findViewById(R.id.container_2) == null;
         canvasFragment = new CanvasFragment();
