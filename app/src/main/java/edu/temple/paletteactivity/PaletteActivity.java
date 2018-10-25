@@ -20,53 +20,25 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class PaletteActivity extends AppCompatActivity {
-
+public class PaletteActivity extends AppCompatActivity implements SpinnerFragment.GetColorInterface {
     CanvasFragment canvasFragment;
-    Spinner customspinner;
 
-
+    boolean singlePane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palette);
 
-        customspinner = findViewById(R.id.spinner);
-        Resources res = this.getResources();
-        final String[] spinnerlabels = res.getStringArray(R.array.colors);
-        customspinner.setAdapter(new CustomAdapter(this, spinnerlabels));
-        customspinner.setSelection(0,false);
-
+        singlePane = findViewById(R.id.container_2) == null;
         canvasFragment = new CanvasFragment();
+        SpinnerFragment spinnerFragment = new SpinnerFragment();
+        addFragment(spinnerFragment, R.id.container_1);
 
 
-        customspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
-                    Bundle selectedcolor = new Bundle();
-                    selectedcolor.putString("color", spinnerlabels[i]);
-
-                    canvasFragment.setArguments(selectedcolor);
-                    addFragment(canvasFragment, R.id.container_1);
-
-                    //findViewById(R.id.fragment_layout).setBackgroundColor(Color.parseColor(spinnerlabels[i]));
-                    //canvasFragment.getView().setBackgroundColor(Color.parseColor(spinnerlabels[i]));
-
-                    //sendColor(spinnerlabels[i]);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-
-
-        });
+        if (!singlePane) {
+            addFragment(canvasFragment, R.id.container_2);
+        }
 
     }
 
@@ -77,8 +49,25 @@ public class PaletteActivity extends AppCompatActivity {
                 .commit();
     }
 
-//    public void sendColor(String color){
-//        canvasFragment.setColor(color);
-//        //canvasFragment.getView().setBackgroundColor(Color.parseColor(spinnerlabels[i]));
-//    }
+    @Override
+    public void colorSelected(String colorSelected) { //calls a new CanvasFragment to be created based on colorselected on previous fragment.
+        if (singlePane) {
+
+            CanvasFragment newFragment = CanvasFragment.newInstance(colorSelected); //creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_1, newFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
+                    .addToBackStack(null)
+                    .commit();
+        }
+        else {
+            CanvasFragment newFragment = CanvasFragment.newInstance(colorSelected); //creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_2, newFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
+                    .addToBackStack(null)
+                    .commit();
+
+        }
+
+    }
+
 }

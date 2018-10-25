@@ -16,23 +16,32 @@ import org.w3c.dom.Text;
 
 public class CanvasFragment extends Fragment {
 
-//    private static final String argcolor = "argtext";
-//
-//
+    String colorSelected;
 
-//    public static CanvasFragment newInstance(String color){
-//        CanvasFragment fragment = new CanvasFragment();
-//        Bundle selectedcolor = new Bundle();
-//        selectedcolor.putString(argcolor, color);
-//        fragment.setArguments(selectedcolor);
-//        return fragment;
-//
-//    }
-
-    Layout layout;
+    //Layout layout;
 
     public CanvasFragment() {
         //default empty constructor
+    }
+
+    public static CanvasFragment newInstance (String colorSelected) {
+        CanvasFragment canvasFragment = new CanvasFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("color", colorSelected);
+
+        canvasFragment.setArguments(bundle);
+
+        return canvasFragment;
+    }
+
+    @Override //why is this necessary, purpose?
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null)
+            colorSelected = getArguments().getString("color");
+
     }
 
     @Nullable
@@ -40,24 +49,23 @@ public class CanvasFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_canvas, container, false);
 
-        String text = getArguments().getString("color");
-        layout.setBackgroundColor(Color.parseColor(text));
+        String text = colorSelected;
+        layout.setBackgroundColor(Color.parseColor(text)); //what happens when layout is set to background color "" when it is first called
 
-
+        //change(colorSelected); //how to use change to change fragments based on item selected
 
 
         return layout;
     }
 
-    @Nullable
-    @Override
-    public View getView() {
-        return super.getView();
-    }
-
-//    public void setColor(String color) {
-//        layout = (TextView) layout.findViewById(R.id.container);
-//        layout.setBackgroundColor(Color.parseColor(color));
-//
+//    public void changeColor(String planetName) {
+//        change(planetName);
 //    }
+//
+//    private void change (String colorSelected) {
+//        switch (colorSelected) {
+//
+//        }
+//    }
+
 }
