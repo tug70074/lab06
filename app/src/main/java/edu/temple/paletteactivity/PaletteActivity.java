@@ -46,6 +46,7 @@ public class PaletteActivity extends AppCompatActivity implements SpinnerFragmen
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerID, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -53,18 +54,36 @@ public class PaletteActivity extends AppCompatActivity implements SpinnerFragmen
     public void colorSelected(String colorSelected) { //calls a new CanvasFragment to be created based on colorselected on previous fragment.
         if (singlePane) {
 
-            CanvasFragment newFragment = CanvasFragment.newInstance(colorSelected); //creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_1, newFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
+            Bundle bundle = new Bundle();
+            bundle.putString("color", colorSelected);
+
+            canvasFragment.setArguments(bundle);//creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
+
+            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction()
+                    .replace(R.id.container_1, canvasFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
                     .addToBackStack(null)
                     .commit();
+
+            fm.executePendingTransactions();//enforce all the pending transactions before lines after.
+            canvasFragment.change(); //asynchronize, not sychronized. parallel
+
+
         }
+
         else {
-            CanvasFragment newFragment = CanvasFragment.newInstance(colorSelected); //creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container_2, newFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
-                    .addToBackStack(null)
-                    .commit();
+             //creates canvas fragment with a colorSelected argument will use string in a bundle and set arguments in that string
+            Bundle bundle = new Bundle();
+            bundle.putString("color", colorSelected);
+
+            canvasFragment.setArguments(bundle);
+
+            canvasFragment.change();
+
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.container_2, canvasFragment) //replaces container1 with new fragment if single pane. covers spinner fragment if you will
+//                    .addToBackStack(null)
+//                    .commit();
 
         }
 
