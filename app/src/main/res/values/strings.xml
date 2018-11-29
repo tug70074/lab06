@@ -1,11 +1,30 @@
 <resources>
     <string name="app_name">PaletteActivityInEnglish</string>
+    <string-array name="colorTitles">
+        <item
+            >"blue"</item>
+        <item
+            >"magenta"</item>
+        <item
+            >"red"</item>
+        <item
+            >"green"</item>
+        <item
+            >"yellow"</item>
+
+    </string-array>
+
     <string-array name="colors">
-        <item>"blue"</item>
-        <item>"magenta"</item>
-        <item>"red"</item>
-        <item>"green"</item>
-        <item>"yellow"</item>
+        <item
+            >"blue"</item>
+        <item
+            >"magenta"</item>
+        <item
+            >"red"</item>
+        <item
+            >"green"</item>
+        <item
+            >"yellow"</item>
 
     </string-array>
 

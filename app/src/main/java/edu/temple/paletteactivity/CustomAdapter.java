@@ -61,7 +61,17 @@ public class CustomAdapter extends BaseAdapter {
 
         textColor.setText(colors[i]);
 
-        textColor.setBackgroundColor(Color.parseColor(colors[i]));
+        if (colors[i].contains("blue"))
+        {textColor.setBackgroundColor(Color.BLUE);}
+        else if (colors[i].contains("magenta"))
+        {textColor.setBackgroundColor(Color.MAGENTA);}
+        else if (colors[i].contains("red"))
+        {textColor.setBackgroundColor(Color.RED);}
+        else if (colors[i].contains("green"))
+        {textColor.setBackgroundColor(Color.GREEN);}
+
+        else if (colors[i].contains("yellow"))
+        {textColor.setBackgroundColor(Color.YELLOW);}
 
 
 

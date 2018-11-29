@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PaletteActivityInSpanish</string>
+    <string-array name="colorTitles">
+        <item
+            >"espanolblue"</item>
+        <item
+            >"espanolmagenta"</item>
+        <item
+            >"espanolred"</item>
+        <item
+            >"espanolgreen"</item>
+        <item
+            >"espanolyellow"</item>
+
+    </string-array>
+
     <string-array name="colors">
         <item
             >"blue"</item>

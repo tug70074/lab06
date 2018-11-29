@@ -57,7 +57,28 @@ public class CanvasFragment extends Fragment {
 
     public void change() {
         colorSelected = getArguments().getString("color");
-        canvaslayout.setBackgroundColor(Color.parseColor(colorSelected));
+
+//        String[] colorStringArray = getResources().getStringArray(R.array.colorTitles);
+//        String[] colorValues = getResources().getStringArray(R.array.colors);
+//
+//        int indexvalue = colorStringArray.indexOf(colorSelected);
+
+        if (colorSelected.contains("blue"))
+        {canvaslayout.setBackgroundColor(Color.BLUE);}
+        else if (colorSelected.contains("magenta"))
+        {canvaslayout.setBackgroundColor(Color.MAGENTA);}
+        else if (colorSelected.contains("red"))
+        {canvaslayout.setBackgroundColor(Color.RED);}
+        else if (colorSelected.contains("green"))
+        {canvaslayout.setBackgroundColor(Color.GREEN);}
+
+        else if (colorSelected.contains("yellow"))
+        {canvaslayout.setBackgroundColor(Color.YELLOW);}
+
+
+
+
+
     }
 
 }

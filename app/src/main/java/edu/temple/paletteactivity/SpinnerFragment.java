@@ -39,7 +39,7 @@ public class SpinnerFragment extends Fragment {
 
         customspinner = v.findViewById(R.id.spinner);
         Resources res = this.getResources();
-        final String[] spinnerlabels = res.getStringArray(R.array.colors);
+        final String[] spinnerlabels = res.getStringArray(R.array.colorTitles);
         customspinner.setAdapter(new CustomAdapter(parent, spinnerlabels)); //when you use views inside fragment.  fragment cant be context needs parrent, needs on attach for parent context
         customspinner.setSelection(0,false);
 
